@@ -89,9 +89,7 @@ public class IndexOfAnElement {
 			} else {
 				left = mid + 1;
 			}
-
 		}
-
 		return 0;
 	}
 
