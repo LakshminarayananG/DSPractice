@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.Test;
+import org.junit.Assert;
+
 
 public class FirstAndLastIndex {
 	
@@ -23,9 +25,9 @@ public class FirstAndLastIndex {
 	{
 		int [] nums= {5,7,7,8,8,10};
 		int target=8;
-		System.out.println(Arrays.toString(findTargetIndicesUsing2Ptr(nums, target)));
-		System.out.println(Arrays.toString(findTargetUsingList(nums, target)));
-		System.out.println(Arrays.toString(getFirstLastIndexUsingBinary(nums, target)));
+		Assert.assertEquals(Arrays.toString(new int[] {3,4}), Arrays.toString(findTargetIndicesUsing2Ptr(nums, target)));
+		Assert.assertEquals(Arrays.toString(new int[] {3,4}), Arrays.toString(findTargetUsingList(nums, target)));
+		Assert.assertEquals(Arrays.toString(new int[] {3,4}), Arrays.toString(getFirstLastIndexUsingBinary(nums, target)));
 	}
 	
 	@Test
@@ -33,10 +35,9 @@ public class FirstAndLastIndex {
 	{
 		int [] nums= {5,7,7,8,8,10};
 		int target=6;
-		System.out.println("2nd Example");
-		System.out.println(Arrays.toString(findTargetIndicesUsing2Ptr(nums, target)));
-		System.out.println(Arrays.toString(findTargetUsingList(nums, target)));
-		System.out.println(Arrays.toString(getFirstLastIndexUsingBinary(nums, target)));
+		Assert.assertEquals(Arrays.toString(new int[] {-1,-1}), Arrays.toString(findTargetIndicesUsing2Ptr(nums, target)));
+		Assert.assertEquals(Arrays.toString(new int[] {-1,-1}), Arrays.toString(findTargetUsingList(nums, target)));
+		Assert.assertEquals(Arrays.toString(new int[] {-1,-1}), Arrays.toString(getFirstLastIndexUsingBinary(nums, target)));
 	}
 	
 	@Test
@@ -44,19 +45,21 @@ public class FirstAndLastIndex {
 	{
 		int [] nums= {7,7,7,7,7,7};
 		int target=7;
-		System.out.println("3rd Example");
-		System.out.println(Arrays.toString(findTargetIndicesUsing2Ptr(nums, target)));
-		System.out.println(Arrays.toString(findTargetUsingList(nums, target)));
-		System.out.println(Arrays.toString(getFirstLastIndexUsingBinary(nums, target)));
+		Assert.assertEquals(Arrays.toString(new int[] {0,5}), Arrays.toString(findTargetIndicesUsing2Ptr(nums, target)));
+		Assert.assertEquals(Arrays.toString(new int[] {0,5}), Arrays.toString(findTargetUsingList(nums, target)));
+		Assert.assertEquals(Arrays.toString(new int[] {0,5}), Arrays.toString(getFirstLastIndexUsingBinary(nums, target)));
 	}
 	
 	@Test
 	public void eg4()
 	{
-		int [] nums= {8,8,8,8,8,7};
-		int target=7;
-		System.out.println(Arrays.toString(findTargetIndicesUsing2Ptr(nums, target)));
+		int [] nums= {5,7,7,8,8,10};
+		int target=10;
+		Assert.assertEquals(Arrays.toString(new int[] {5,5}), Arrays.toString(findTargetIndicesUsing2Ptr(nums, target)));
+		Assert.assertEquals(Arrays.toString(new int[] {5,5}), Arrays.toString(findTargetUsingList(nums, target)));
+		Assert.assertEquals(Arrays.toString(new int[] {5,5}), Arrays.toString(getFirstLastIndexUsingBinary(nums, target)));
 	}
+	
 	
 	/**
 	 * Approach: Using 2 Pointer
@@ -112,7 +115,7 @@ public class FirstAndLastIndex {
 			output.add(eachInt);
 		}
 		
-		return new int[] {output.indexOf(target), output.indexOf(target)};
+		return new int[] {output.indexOf(target), output.lastIndexOf(target)};
 	}
 	
 	
@@ -123,12 +126,14 @@ public class FirstAndLastIndex {
 	 * 2. Iterate until left < = right
 	 * 3. Find mid value =(left+right)/2
 	 * 4. If arr[mid] equals target, assign 
-	 * temp=mid and flag equals true, assign right=mid-1 to travese even left
+	 * temp=mid and flag equals true, assign right=mid-1 to travese further left
 	 * 5. If arr[mid] equals target, assign 
-	 * temp=mid and flag equals false, assign left=mid+1 to travese even right
+	 * temp=mid and flag equals false, assign left=mid+1 to travese further right
 	 * 6. If arr[mid] < target, left=mid+1
 	 * 7. If arr[mid] > target, right=mid-1;
 	 * 8. return temp
+	 * 
+	 * Time Complexity: O[logN]
 	 * 
 	 * 
 	 * @param input
@@ -137,34 +142,32 @@ public class FirstAndLastIndex {
 	 */
 	
 	
-	public int[] getFirstLastIndexUsingBinary(int[] nums,int target) {
-		
-		int left=getLastOrFirstIndex(nums,target,true);
-		int right=getLastOrFirstIndex(nums,target,false);
-		return new int[] {left,right};
-	}
-	
-	private int getLastOrFirstIndex(int[] nums, int target,boolean flag) {
-		
-		int left=0;int right=nums.length-1;
-		int temp=-1;
-		
-		
-		while(left <= right) {
-			int mid=(left+right)/2;
-			if(nums[mid] == target) {
-				temp=mid;
-				if(flag ==true)
-					right=mid-1;
-				else {
-					left=mid+1;
-				}
-			}else if(nums[mid] > target) {
-				right=mid-1;
-			}else left=mid+1;
-			
+	private int[] getFirstLastIndexUsingBinary(int[] nums, int target) {
+			int left=getLastOrFirstIndex(nums,target,true);
+			int right=getLastOrFirstIndex(nums,target,false);
+			return new int[] {left,right};
 		}
-		return temp;
-	}
+		
+		private int getLastOrFirstIndex(int[] nums, int target,boolean flag) {
+			
+			int left=0;int right=nums.length-1;
+			int temp=-1;
+			
+			while(left <= right) {
+				int mid=(left+right)/2;
+				if(nums[mid] == target) {
+					temp=mid;
+					if(flag ==true)
+						right=mid-1;
+					else {
+						left=mid+1;
+					}
+				}else if(nums[mid] > target) {
+					right=mid-1;
+				}else left=mid+1;
+				
+			}
+			return temp;
+		}
 
 }
