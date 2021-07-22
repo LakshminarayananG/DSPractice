@@ -47,6 +47,8 @@ public class CountOfOnes {
 	
 	
 	/**
+	 * Approach: Linear Scan
+	 * 
 	 * 1. Check if arr[0] equals 1
 	 * 		Yes --> return arr.length since all elements would be 1 to the right of it
 	 * 2. Check if arr[arr.len-1] equals 0
@@ -73,6 +75,8 @@ public class CountOfOnes {
 		
 		return 0;
 	}
+	
+	
 	
 	/**
 	 * Approach: Using Binary Search
@@ -102,6 +106,8 @@ public class CountOfOnes {
 		int mid=(left+right)/2;
 		return countOnesUsingBinarySearch(nums, left, mid) + countOnesUsingBinarySearch(nums, mid+1, right);
 	}
+	
+	
 	
 	
 	/**
