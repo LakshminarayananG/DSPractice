@@ -15,12 +15,12 @@ public class ShortestSubString {
 	/**
 	 * 
 	 * 
-	 * shortest substring having all chars
+	 * Given a String, find the shortest substring having all chars
 	 * 
 	 * abbcafab
 	 * 
 	 * Output: bcaf
-	 * a=1 b=1 c=1 f=1
+	 * 
 	 * 
 	 */
 	
