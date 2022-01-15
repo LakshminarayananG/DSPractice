@@ -115,8 +115,8 @@ public class SearchInRotatedSortedArray {
 			int mid=start+(end-start)/2;
 			if(arr[mid]==target) return mid;
 			
-			if(arr[mid]>=start) {
-				if(arr[mid]>target && target>arr[start]) end=mid-1; 
+			if(arr[mid]>=arr[start]) {
+				if(arr[mid]>target && target>=arr[start]) end=mid-1; 
 				else start=mid+1;
 			}
 			
@@ -129,6 +129,11 @@ public class SearchInRotatedSortedArray {
 		
         return -1;    
 	}
+	
+	
+	
+	
+	
 	
 	
 
