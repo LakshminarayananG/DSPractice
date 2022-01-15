@@ -47,7 +47,7 @@ public class TargetPositionInfiniteSortedArray {
 	/*
 	 * Approach using Binary Search
 	 * 
-	 * 1. Since we don't can't use the arr.len to determine end value, assign start=0,end=1
+	 * 1. Since we can't use the arr.len to determine end value, assign start=0,end=1
 	 * 2. Iterate in small blocks of the array and check if the target value is greater than arr[end]
 	 * 3. If target value > arr[end]
 	 * 		Yes -> This means that value is to the right of end element
